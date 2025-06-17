@@ -21,5 +21,13 @@ public class WarehouseServices {
     public WarehouseEntity add(WarehouseEntity warehouseEntity){
         return wareHouseRepository.save(warehouseEntity);
     }
+    public WarehouseEntity update(WarehouseEntity warehouseEntity){
+        return wareHouseRepository.save(warehouseEntity);
+    }
+    public String delete(Long id){
+        WarehouseEntity warehouse = wareHouseRepository.findById(id).get();
+        wareHouseRepository.delete(warehouse);
+        return "Deleted successfully";
+    }
 
 }

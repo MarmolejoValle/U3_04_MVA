@@ -26,4 +26,13 @@ public class WarehouseController {
     public ResponseEntity<WarehouseEntity>  addWarehouse(@Valid @RequestBody WarehouseEntity warehouseEntity){
         return ResponseEntity.ok().body(warehouseServices.add(warehouseEntity));
     }
+    @PutMapping()
+    public ResponseEntity<WarehouseEntity>  updateWarehouse(@Valid @RequestBody WarehouseEntity warehouseEntity){
+        return ResponseEntity.ok().body(warehouseServices.update(warehouseEntity));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String>  deleteWarehouse(@Valid @PathVariable Long id){
+        return ResponseEntity.ok().body(warehouseServices.delete(id));
+    }
+
 }
