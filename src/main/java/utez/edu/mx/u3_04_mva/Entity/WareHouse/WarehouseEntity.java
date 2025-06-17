@@ -3,14 +3,13 @@ package utez.edu.mx.u3_04_mva.Entity.WareHouse;
 import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import utez.edu.mx.u3_04_mva.Entity.Branch.BranchEntity;
 import utez.edu.mx.u3_04_mva.Entity.Client.ClientEntity;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Random;
 
 @Entity
 @Data
@@ -20,13 +19,11 @@ public class WarehouseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotNull
     private String code;
-    @NotBlank
     private LocalDate registrationDate;
-    @NotBlank
+
     private double salePrice;
-    @NotBlank
     private double rentalPrice;
 
     @Enumerated(EnumType.STRING)
