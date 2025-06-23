@@ -29,6 +29,10 @@ public class WarehouseServices {
         return wareHouseRepository.save(newWareHouse);
     }
     public WarehouseEntity update(WarehouseEntity warehouseEntity){
+
+        if (warehouseEntity.getStatus().name().equals("VENDIDO")){
+            warehouseEntity.setClient(null);
+        }
         return wareHouseRepository.save(warehouseEntity);
     }
     public String delete(Long id){

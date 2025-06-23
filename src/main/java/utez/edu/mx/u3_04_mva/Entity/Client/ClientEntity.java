@@ -4,6 +4,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import utez.edu.mx.u3_04_mva.Entity.Branch.BranchEntity;
@@ -17,9 +18,11 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Pattern(regexp = "^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,50}$")
     private String fullName;
     @NotBlank
     @Size(min = 10, max = 12)
+    @Pattern(regexp = "^[0-9]{10,12}$")
     private String phoneNumber;
     @NotBlank
     @Email

@@ -2,6 +2,7 @@ package utez.edu.mx.u3_04_mva.Entity.Branch;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,10 @@ public class BranchEntity {
     @NotBlank
     private String code;
     @NotBlank
+    @Pattern(regexp = "^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,50}$")
     private String state;
     @NotBlank
+    @Pattern(regexp = "^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,50}$")
     private String municipality;
 
     @PrePersist
