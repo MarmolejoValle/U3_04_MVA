@@ -22,7 +22,7 @@ public class BranchContoller {
         return ResponseEntity.ok().body(branchServices.getBranches());
     }
     @PostMapping()
-    public ResponseEntity<BranchEntity> addBranch(@RequestBody BranchEntity branchEntity){
+    public ResponseEntity<BranchEntity> addBranch(@Validated @RequestBody BranchEntity branchEntity){
         return ResponseEntity.ok().body(branchServices.add(branchEntity));
     }
     @PutMapping()

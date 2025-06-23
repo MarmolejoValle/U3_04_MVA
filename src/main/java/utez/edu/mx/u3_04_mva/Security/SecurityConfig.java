@@ -21,6 +21,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/branches/**").hasRole("ADMIN")
                         .requestMatchers("/api/warehouses/**").authenticated()
                         .requestMatchers("/api/clients/**").authenticated()
+                        .requestMatchers("/api/transactions/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf.disable()) // ✅ Nueva forma de deshabilitar CSRF

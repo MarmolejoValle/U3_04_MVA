@@ -2,6 +2,8 @@ package utez.edu.mx.u3_04_mva.Service.WareHouse;
 
 import org.springframework.stereotype.Service;
 import utez.edu.mx.u3_04_mva.Entity.Branch.BranchRepository;
+import utez.edu.mx.u3_04_mva.Entity.Transactions.TransactionsEntity;
+import utez.edu.mx.u3_04_mva.Entity.Transactions.TransactionsRepository;
 import utez.edu.mx.u3_04_mva.Entity.WareHouse.WareHouseRepository;
 import utez.edu.mx.u3_04_mva.Entity.WareHouse.WarehouseEntity;
 import utez.edu.mx.u3_04_mva.Service.Branch.BranchServices;
@@ -12,11 +14,13 @@ import java.util.List;
 public class WarehouseServices {
     private final WareHouseRepository wareHouseRepository;
     private final BranchRepository branchRepository;
+    private final TransactionsRepository transactionsRepository;
 
 
-    public WarehouseServices(WareHouseRepository wareHouseRepository, BranchRepository branchRepository) {
+    public WarehouseServices(WareHouseRepository wareHouseRepository, BranchRepository branchRepository, TransactionsRepository transactionsRepository) {
         this.wareHouseRepository = wareHouseRepository;
         this.branchRepository = branchRepository;
+        this.transactionsRepository = transactionsRepository;
     }
     public List<WarehouseEntity> getWarehouses(){
         return wareHouseRepository.findAll();
@@ -30,10 +34,12 @@ public class WarehouseServices {
     }
     public WarehouseEntity update(WarehouseEntity warehouseEntity){
 
-        if (warehouseEntity.getStatus().name().equals("VENDIDO")){
+        if (warehouseEntity.getStatus().name().equals("VENDIDO") || warehouseEntity.getStatus().name().equals("DISPONIBLE")){
             warehouseEntity.setClient(null);
         }
-        return wareHouseRepository.save(warehouseEntity);
+        WarehouseEntity newWareHouse =  wareHouseRepository.save(warehouseEntity);
+        transactionsRepository.save(new TransactionsEntity(newWareHouse.moviment()));
+        return newWareHouse;
     }
     public String delete(Long id){
         WarehouseEntity warehouse = wareHouseRepository.findById(id).get();

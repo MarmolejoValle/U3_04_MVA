@@ -55,4 +55,21 @@ public class WarehouseEntity {
         this.code = branch.getCode() + "-A" + id;
     }
 
+    public String moviment() {
+        StringBuilder sb = new StringBuilder("Movement log → ");
+
+        sb.append("Warehouse [").append(code != null ? code : "UNASSIGNED").append("] ");
+        sb.append("is currently ").append(status);
+
+        if (status == WarehouseStatus.RENTADO && client != null) {
+            sb.append(" by client: ").append(client.getFullName());
+        } else if (status == WarehouseStatus.VENDIDO && owner != null) {
+            sb.append(" and owned by: ").append(owner.getFullName());
+        }
+
+        sb.append(" | Registered on: ").append(registrationDate != null ? registrationDate : "N/A");
+
+        return sb.toString();
+    }
+
 }
