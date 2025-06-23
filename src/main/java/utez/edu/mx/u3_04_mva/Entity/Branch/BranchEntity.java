@@ -30,6 +30,12 @@ public class BranchEntity {
     public void generateCode() {
         String date = new SimpleDateFormat("ddMMyyyy").format(new Date());
         String randomDigits = String.format("%04d", new Random().nextInt(10000));
-        this.code = "C"+ "-" + date + "-" + randomDigits;
+        if(this.code != null){
+            this.code = "C"+ "-" + date + "-" + randomDigits;
+        }
+        else {
+            this.code = "UNASSIGNED";
+        }
+
     }
 }
